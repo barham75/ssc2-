@@ -1,4 +1,5 @@
-import SecretCheckinClient from "./SecretCheckinClient.tsx";
+import SecretCheckinClient from "./SecretCheckinClient";
+
 
 
 export default async function Page({
