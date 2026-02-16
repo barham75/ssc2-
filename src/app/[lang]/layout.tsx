@@ -1,14 +1,17 @@
 import FooterGate from "@/components/FooterGate";
 import LangHtmlSync from "./LangHtmlSync";
+import type { ReactNode } from "react";
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: { lang: string };
+  children: ReactNode;
+  params: Promise<{ lang: string }>;
 }) {
-  const lang = params?.lang === "en" ? "en" : "ar";
+  const { lang: rawLang } = await params;
+
+  const lang = rawLang === "en" ? "en" : "ar";
   const dir = lang === "ar" ? "rtl" : "ltr";
 
   return (
