@@ -4,14 +4,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+/* تحديد اللغة الحالية من المسار */
 function detectBase(pathname: string) {
   const p = pathname || "/";
-  // إذا الرابط يبدأ بـ /ar أو /en
   if (p === "/ar" || p.startsWith("/ar/")) return "/ar";
   if (p === "/en" || p.startsWith("/en/")) return "/en";
-
-  // إذا ما في lang بالمسار (مثل /lunch) خلّيه يروح للغة الافتراضية
-  return "/ar";
+  return "/ar"; // اللغة الافتراضية
 }
 
 export default function SideMenu() {
@@ -19,7 +17,9 @@ export default function SideMenu() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  // استثناء صفحة التسجيل (مع أو بدون lang)
+  const base = useMemo(() => detectBase(pathname), [pathname]);
+
+  /* استثناء صفحة التسجيل */
   const isRegister =
     pathname === "/register" ||
     pathname.startsWith("/register/") ||
@@ -27,8 +27,6 @@ export default function SideMenu() {
     pathname.startsWith("/ar/register/") ||
     pathname === "/en/register" ||
     pathname.startsWith("/en/register/");
-
-  const base = useMemo(() => detectBase(pathname), [pathname]);
 
   useEffect(() => {
     setOpen(false);
@@ -64,20 +62,20 @@ export default function SideMenu() {
   return (
     <>
       {/* زر القائمة تحت الهيدر */}
-      <div style={{ padding: "15px 20px" }}>
+      <div style={{ padding: "12px 20px" }}>
         <button
           onClick={() => setOpen(true)}
           style={{
-            padding: "10px 16px",
+            padding: "6px 11px",
             background: "#002b5c",
             color: "white",
             border: "none",
-            borderRadius: "8px",
-            fontSize: "16px",
+            borderRadius: "7px",
+            fontSize: "13px",
             cursor: "pointer",
           }}
         >
-          القائمة ☰
+          ☰ القائمة
         </button>
       </div>
 
@@ -88,7 +86,7 @@ export default function SideMenu() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0,0,0,0.4)",
+            background: "rgba(0,0,0,0.35)",
             zIndex: 998,
           }}
         />
@@ -101,66 +99,71 @@ export default function SideMenu() {
           top: 0,
           right: 0,
           height: "100%",
-          width: "85%",
-          maxWidth: "320px",
+          width: "40%",
+          maxWidth: "170px",
           background: "white",
-          boxShadow: "-5px 0 20px rgba(0,0,0,0.2)",
+          boxShadow: "-3px 0 15px rgba(0,0,0,0.15)",
           transform: open ? "translateX(0)" : "translateX(100%)",
           transition: "transform 0.25s ease",
           zIndex: 999,
-          padding: "20px",
+          padding: "14px",
           display: "flex",
           flexDirection: "column",
           direction: "rtl",
         }}
         aria-hidden={!open}
       >
+        {/* زر الإغلاق */}
         <button
           onClick={() => setOpen(false)}
           style={{
             alignSelf: "flex-start",
             border: "none",
             background: "transparent",
-            fontSize: "22px",
+            fontSize: "18px",
             cursor: "pointer",
-            marginBottom: "14px",
+            marginBottom: "10px",
           }}
           aria-label="Close menu"
         >
           ✕
         </button>
 
+        {/* روابط القائمة */}
         {links.map((l) => (
           <Link
             key={l.href}
             href={l.href}
             onClick={() => setOpen(false)}
             style={{
-              padding: "12px",
-              marginBottom: "8px",
-              borderRadius: "10px",
-              background: "#f2f4f8",
+              padding: "8px",
+              marginBottom: "6px",
+              borderRadius: "8px",
+              background: "#f5f7fa",
               textDecoration: "none",
               color: "#002b5c",
-              fontWeight: 700,
+              fontWeight: 600,
+              fontSize: "12px",
             }}
           >
             {l.label}
           </Link>
         ))}
 
+        {/* زر الخروج */}
         <button
           onClick={logout}
           style={{
             marginTop: "auto",
             width: "100%",
-            padding: "10px",
+            padding: "6px",
             border: "1px solid #ef4444",
             background: "white",
             color: "#ef4444",
-            borderRadius: "10px",
+            borderRadius: "8px",
             cursor: "pointer",
-            fontWeight: 800,
+            fontWeight: 700,
+            fontSize: "12px",
             textAlign: "right",
           }}
         >
