@@ -33,6 +33,9 @@ function t(lang: string) {
     eval: "تقييم المؤتمر / Conference Evaluation",
     sponsors: "الداعمون / Sponsors",
     lunch: "دعوة الغداء / Lunch Invitation",
+
+    // ✅ جديد: صفحة المنظمون (تفتح secret-checkin)
+    organizers: ar ? "المنظمون / Organizers" : "Organizers / المنظمون",
   };
 }
 
@@ -75,8 +78,6 @@ export default function HomeClient({ lang }: { lang: string }) {
         )}
       </div>
 
-      {/* ✅ تم حذف زر صفحة المنظم + زر الخروج من الرئيسية (كما طلبت) */}
-
       {/* عناوين الصفحات */}
       <h3 style={{ textAlign: "center", marginTop: 24, marginBottom: 12 }}>
         {L.menuTitle}
@@ -96,6 +97,9 @@ export default function HomeClient({ lang }: { lang: string }) {
         <Card href={`/${lang}/evaluation`} title={L.eval} />
         <Card href={`/${lang}/sponsors`} title={L.sponsors} />
         <Card href={`/${lang}/lunch-invite`} title={L.lunch} />
+
+        {/* ✅ جديد: المنظمون -> نفس صفحة secret-checkin */}
+        <Card href={`/${lang}/secret-checkin`} title={L.organizers} />
       </div>
 
       {/* لا يوجد Footer هنا */}

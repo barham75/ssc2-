@@ -50,6 +50,9 @@ export default function SideMenu() {
     { href: `${base}/evaluation`, label: "تقييم المؤتمر / Conference Evaluation" },
     { href: `${base}/sponsors`, label: "الداعمون / Sponsors" },
     { href: `${base}/lunch-invite`, label: "دعوة الغداء / Lunch Invitation" },
+
+    // ✅ جديد: صفحة المنظمون (تفتح secret-checkin)
+    { href: `${base}/secret-checkin`, label: "المنظمون / Organizers" },
   ];
 
   function logout() {
