@@ -48,7 +48,8 @@ export default function SideMenu() {
     { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر" },
     { href: `${base}/evaluation`, label: "تقييم المؤتمر" },
     { href: `${base}/sponsors`, label: "الداعمون" },
-    { href: `${base}/lunch`, label: "دعوة الغداء" },
+   { href: `${base}/lunch-invite`, label: "دعوة الغداء" },
+
   ];
 
   function logout() {
