@@ -3,7 +3,7 @@ import Image from "next/image";
 import SideMenu from "@/components/SideMenu";
 
 export const metadata: Metadata = {
-  title: "Chemistry Horizons ",
+  title: "Chemistry Horizons",
   description: "Chemistry Horizons: Innovation for a Sustainable Future",
 };
 
@@ -21,61 +21,72 @@ export default function RootLayout({
           background: "#f4f6f9",
         }}
       >
+        {/* ================= HEADER ================= */}
         <header
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "20px 60px",
             background: "#ffffff",
-            borderBottom: "5px solid #002b5c",
+            borderBottom: "4px solid #002b5c",
+            padding: "20px",
+            textAlign: "center",
           }}
         >
-          <Image
-            src="/jerash.png"
-            alt="University Logo"
-            width={100}
-            height={100}
-            priority
-          />
+          {/* الشعارين متجاورين */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "25px",
+              marginBottom: "12px",
+            }}
+          >
+            {/* شعار الجامعة (يمين) */}
+            <Image
+              src="/jerash.png"
+              alt="University Logo"
+              width={100}
+              height={100}
+              priority
+            />
 
-          <div style={{ textAlign: "center", maxWidth: 700 }}>
-            <h1
+            {/* شعار المؤتمر */}
+            <Image
+              src="/conference.png"
+              alt="Conference Logo"
+              width={100}
+              height={100}
+              priority
               style={{
-                margin: 0,
-                fontSize: "24px",
-                fontWeight: "bold",
-                color: "#002b5c",
+                filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.15))",
               }}
-            >
-              Chemistry Horizons 
-            </h1>
-
-            <p
-              style={{
-                margin: "6px 0 0 0",
-                fontSize: "18px",
-                color: "#444",
-                fontWeight: 500,
-              }}
-            >
-              Innovation for a Sustainable Future
-            </p>
+            />
           </div>
 
-          <Image
-            src="/conference.png"
-            alt="Conference Logo"
-            width={100}
-            height={100}
-            priority
+          {/* عنوان المؤتمر أسفل الشعارين */}
+          <h1
             style={{
-              filter: "drop-shadow(0px 6px 10px rgba(0,0,0,0.18))",
+              margin: 0,
+              fontSize: "22px",
+              fontWeight: "bold",
+              color: "#002b5c",
             }}
-          />
+          >
+            Chemistry Horizons 2026
+          </h1>
+
+          <p
+            style={{
+              margin: "6px 0 0 0",
+              fontSize: "14px",
+              color: "#555",
+              fontWeight: 500,
+            }}
+          >
+            Innovation for a Sustainable Future
+          </p>
         </header>
 
-        {/* ✅ القائمة الآن تحت الهيدر */}
+        {/* القائمة تحت الهيدر */}
         <SideMenu />
 
         <main style={{ padding: "40px" }}>{children}</main>
