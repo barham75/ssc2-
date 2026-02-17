@@ -42,14 +42,14 @@ export default function SideMenu() {
 
   if (isRegister) return null;
 
+  // ✅ عناوين القائمة باللغتين (نصوص صحيحة بدل أسماء المسارات)
   const links = [
-    { href: `${base}/`, label: "الرئيسية" },
-    { href: `${base}/program`, label: "برنامج المؤتمر/program" },
-    { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر/poster-vote" },
-    { href: `${base}/evaluation`, label: "تقييم المؤتمر/evaluation" },
-    { href: `${base}/sponsors`, label: "الداعمون/sponsors" },
-   { href: `${base}/lunch-invite`, label: "دعوة الغداء/lunch-invite" },
-
+    { href: `${base}/`, label: "الرئيسية / Home" },
+    { href: `${base}/program`, label: "برنامج المؤتمر / Conference Program" },
+    { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر / Best Poster Vote" },
+    { href: `${base}/evaluation`, label: "تقييم المؤتمر / Conference Evaluation" },
+    { href: `${base}/sponsors`, label: "الداعمون / Sponsors" },
+    { href: `${base}/lunch-invite`, label: "دعوة الغداء / Lunch Invitation" },
   ];
 
   function logout() {
@@ -57,7 +57,7 @@ export default function SideMenu() {
       localStorage.clear();
     } catch {}
     setOpen(false);
-    router.push(`${base}/`);
+    router.push(`${base}/register`);
   }
 
   return (
@@ -76,7 +76,7 @@ export default function SideMenu() {
             cursor: "pointer",
           }}
         >
-          ☰ القائمة
+          ☰ القائمة / Menu
         </button>
       </div>
 
@@ -143,15 +143,16 @@ export default function SideMenu() {
               background: "#f5f7fa",
               textDecoration: "none",
               color: "#002b5c",
-              fontWeight: 600,
+              fontWeight: 800,
               fontSize: "12px",
+              lineHeight: 1.2,
             }}
           >
             {l.label}
           </Link>
         ))}
 
-        {/* زر الخروج */}
+        {/* ✅ زر الخروج: آخر خيار بأسفل القائمة */}
         <button
           onClick={logout}
           style={{
@@ -163,12 +164,12 @@ export default function SideMenu() {
             color: "#ef4444",
             borderRadius: "8px",
             cursor: "pointer",
-            fontWeight: 700,
+            fontWeight: 900,
             fontSize: "12px",
             textAlign: "right",
           }}
         >
-          تسجيل الخروج
+          تسجيل الخروج / Logout
         </button>
       </aside>
     </>

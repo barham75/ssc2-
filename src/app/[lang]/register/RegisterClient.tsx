@@ -6,14 +6,25 @@ import { saveSession } from "@/lib/session";
 
 function t(lang: string) {
   const ar = lang === "ar";
+
+  // ✅ عناوين الحقول باللغتين دائمًا
+  const fullNameLabel = "الاسم / Name";
+  const emailLabel = "البريد الإلكتروني / Email";
+  const orgLabel = "المؤسسة / الجامعة / Organization / University";
+  const hintBilingual = "يمكن إدخال عربي أو إنجليزي / Arabic or English is allowed";
+
   return {
     title: ar ? "التسجيل" : "Registration",
-    fullName: ar ? "الاسم" : "Name",
-    email: ar ? "البريد الإلكتروني" : "Email",
-    org: ar ? "المؤسسة / الجامعة" : "Organization / University",
-    hint: ar ? "يمكن إدخال عربي أو إنجليزي" : "Arabic or English is allowed",
+
+    // ✅ Labels bilingual
+    fullName: fullNameLabel,
+    email: emailLabel,
+    org: orgLabel,
+
+    hint: hintBilingual,
     btn: ar ? "دخول" : "Enter",
 
+    // أخطاء (نتركها حسب اللغة حتى تبقى تجربة المستخدم طبيعية)
     errName: ar ? "الاسم مطلوب" : "Name is required",
     errEmail: ar ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email",
     errOrg: ar ? "اسم المؤسسة/الجامعة مطلوب" : "Organization/University is required",
@@ -80,11 +91,11 @@ export default function RegisterClient({ lang }: { lang: string }) {
       // ✅ حفظ session بالمفاتيح الجديدة + القديمة للتوافق
       saveSession({
         email: data.email,
-        name: data.fullName,                 // ✅ هذا أهم سطر للرئيسية
-        fullName: data.fullName,             // (توافق مع صفحات قديمة)
+        name: data.fullName, // ✅ هذا أهم سطر للرئيسية
+        fullName: data.fullName, // (توافق مع صفحات قديمة)
         org: data.organization,
-        organization: data.organization,      // (توافق قديم)
-        regNo: data.regNo || "",              // ✅ رقم التسجيل (إن وجد)
+        organization: data.organization, // (توافق قديم)
+        regNo: data.regNo || "", // ✅ رقم التسجيل (إن وجد)
         eligibleForQR: !!data.eligibleForQR,
         lunchToken: data.lunchToken || "",
       } as any);
@@ -108,7 +119,7 @@ export default function RegisterClient({ lang }: { lang: string }) {
 
       <form onSubmit={submit} style={{ display: "grid", gap: 14 }}>
         <label>
-          <div style={{ fontWeight: 800, marginBottom: 6 }}>{L.fullName}</div>
+          <div style={{ fontWeight: 900, marginBottom: 6 }}>{L.fullName}</div>
           <input
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
@@ -124,7 +135,7 @@ export default function RegisterClient({ lang }: { lang: string }) {
         </label>
 
         <label>
-          <div style={{ fontWeight: 800, marginBottom: 6 }}>{L.email}</div>
+          <div style={{ fontWeight: 900, marginBottom: 6 }}>{L.email}</div>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -140,7 +151,7 @@ export default function RegisterClient({ lang }: { lang: string }) {
         </label>
 
         <label>
-          <div style={{ fontWeight: 800, marginBottom: 6 }}>{L.org}</div>
+          <div style={{ fontWeight: 900, marginBottom: 6 }}>{L.org}</div>
           <input
             value={organization}
             onChange={(e) => setOrganization(e.target.value)}

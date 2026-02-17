@@ -1,7 +1,5 @@
-
 import LangHtmlSync from "./LangHtmlSync";
 import type { ReactNode } from "react";
-import SideMenu from "@/components/SideMenu";
 
 export default async function LangLayout({
   children,
@@ -18,10 +16,7 @@ export default async function LangLayout({
   return (
     <>
       <LangHtmlSync lang={lang} dir={dir} />
-      <div dir={dir}>
-        {children}
-      
-      </div>
+      <div dir={dir}>{children}</div>
     </>
   );
 }

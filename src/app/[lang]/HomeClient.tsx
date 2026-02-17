@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadSession, clearSession } from "@/lib/session";
-
-const SECRET_PAGE_PATH = "secret-checkin";
+import { loadSession } from "@/lib/session";
 
 type SessionShape = {
   email?: string;
@@ -18,21 +16,23 @@ type SessionShape = {
 
 function t(lang: string) {
   const ar = lang === "ar";
+
+  // ✅ العناوين باللغتين دائمًا
   return {
-    welcome: ar ? "مرحبا" : "Welcome",
-    regNo: ar ? "رقم التسجيل" : "Registration No",
-    notRegistered: ar ? "غير مسجل" : "Not Registered",
-    participant: ar ? "مشارك" : "Participant",
-    menuTitle: ar ? "القائمة الرئيسية" : "Main Menu",
+    // ✅ بدل "مرحبا" -> "Welcome" دائمًا
+    welcome: "Welcome",
 
-    program: ar ? "برنامج المؤتمر" : "Conference Program",
-    vote: ar ? "تصويت أفضل بوستر" : "Best Poster Vote",
-    eval: ar ? "تقييم المؤتمر" : "Conference Evaluation",
-    sponsors: ar ? "الداعمون" : "Sponsors",
-    lunch: ar ? "دعوة الغداء" : "Lunch Invitation",
+    regNo: ar ? "رقم التسجيل / Registration No" : "Registration No / رقم التسجيل",
+    notRegistered: ar ? "غير مسجل / Not Registered" : "Not Registered / غير مسجل",
+    participant: ar ? "مشارك / Participant" : "Participant / مشارك",
 
-    secret: ar ? "صفحة المنظم" : "Organizer Page",
-    logout: ar ? "خروج" : "Logout",
+    menuTitle: ar ? "القائمة الرئيسية / Main Menu" : "Main Menu / القائمة الرئيسية",
+
+    program: "برنامج المؤتمر / Conference Program",
+    vote: "تصويت أفضل بوستر / Best Poster Vote",
+    eval: "تقييم المؤتمر / Conference Evaluation",
+    sponsors: "الداعمون / Sponsors",
+    lunch: "دعوة الغداء / Lunch Invitation",
   };
 }
 
@@ -50,11 +50,6 @@ export default function HomeClient({ lang }: { lang: string }) {
     }
     setSession(s);
   }, [lang, router]);
-
-  function logout() {
-    clearSession();
-    router.push(`/${lang}/register`);
-  }
 
   if (!session) return null;
 
@@ -80,52 +75,14 @@ export default function HomeClient({ lang }: { lang: string }) {
         )}
       </div>
 
-      {/* زر صفحة المنظم + زر الخروج (كما طلبت) */}
-      <div
-        style={{
-          marginTop: 14,
-          display: "flex",
-          gap: 10,
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <Link
-          href={`/${lang}/${SECRET_PAGE_PATH}`}
-          style={{
-            textDecoration: "none",
-            background: "#002b5c",
-            color: "#fff",
-            padding: "10px 14px",
-            borderRadius: 12,
-            fontWeight: 900,
-            boxShadow: "0 2px 10px rgba(0,0,0,0.10)",
-          }}
-        >
-          {L.secret}
-        </Link>
-
-        <button
-          onClick={logout}
-          style={{
-            background: "#b00020",
-            color: "#fff",
-            padding: "10px 14px",
-            borderRadius: 12,
-            fontWeight: 900,
-            border: "none",
-            cursor: "pointer",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.10)",
-          }}
-        >
-          {L.logout}
-        </button>
-      </div>
+      {/* ✅ تم حذف زر صفحة المنظم + زر الخروج من الرئيسية (كما طلبت) */}
 
       {/* عناوين الصفحات */}
-      <h3 style={{ textAlign: "center", marginTop: 24, marginBottom: 12 }}>{L.menuTitle}</h3>
+      <h3 style={{ textAlign: "center", marginTop: 24, marginBottom: 12 }}>
+        {L.menuTitle}
+      </h3>
 
-      {/* ✅ الشبكة: ضع المنظم مباشرة بجانب دعوة الغداء */}
+      {/* شبكة الروابط */}
       <div
         style={{
           display: "grid",
@@ -138,14 +95,10 @@ export default function HomeClient({ lang }: { lang: string }) {
         <Card href={`/${lang}/poster-vote`} title={L.vote} />
         <Card href={`/${lang}/evaluation`} title={L.eval} />
         <Card href={`/${lang}/sponsors`} title={L.sponsors} />
-
-        {/* ✅ دعوة الغداء */}
         <Card href={`/${lang}/lunch-invite`} title={L.lunch} />
-        {/* ✅ صفحة المنظم بجانبها */}
-        <Card href={`/${lang}/secret-checkin`} title={L.secret} />
       </div>
 
-      {/* ملاحظة: لا يوجد Footer هنا (حسب طلبك الرئيسية بدون فوتر) */}
+      {/* لا يوجد Footer هنا */}
     </div>
   );
 }
