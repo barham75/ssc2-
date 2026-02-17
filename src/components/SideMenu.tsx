@@ -44,11 +44,11 @@ export default function SideMenu() {
 
   const links = [
     { href: `${base}/`, label: "الرئيسية" },
-    { href: `${base}/program`, label: "برنامج المؤتمر" },
-    { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر" },
-    { href: `${base}/evaluation`, label: "تقييم المؤتمر" },
-    { href: `${base}/sponsors`, label: "الداعمون" },
-   { href: `${base}/lunch-invite`, label: "دعوة الغداء" },
+    { href: `${base}/program`, label: "برنامج المؤتمر/program" },
+    { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر/poster-vote" },
+    { href: `${base}/evaluation`, label: "تقييم المؤتمر/evaluation" },
+    { href: `${base}/sponsors`, label: "الداعمون/sponsors" },
+   { href: `${base}/lunch-invite`, label: "دعوة الغداء/lunch-invite" },
 
   ];
 

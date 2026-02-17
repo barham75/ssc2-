@@ -44,8 +44,8 @@ export default function RootLayout({
             <Image
               src="/jerash.png"
               alt="University Logo"
-              width={100}
-              height={100}
+              width={90}
+              height={90}
               priority
             />
 
