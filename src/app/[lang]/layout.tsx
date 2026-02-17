@@ -1,6 +1,7 @@
 import FooterGate from "@/components/FooterGate";
 import LangHtmlSync from "./LangHtmlSync";
 import type { ReactNode } from "react";
+import SideMenu from "@/components/SideMenu";
 
 export default async function LangLayout({
   children,

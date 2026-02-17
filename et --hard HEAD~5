@@ -1,0 +1,19 @@
+[33m16e6fc0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Fix register header horizontal layout
+[33mc44ba9a[m Remove duplicate header
+[33m8ba849a[m Remove globals.css import from lang layout
+[33mca89aed[m Fix header horizontal and CSS error
+[33meb38704[m Improve mobile responsive design
+[33m2e98bbc[m Improve mobile responsive design
+[33m0ce84e2[m Full mobile optimized globals
+[33mb91f500[m Install @tailwindcss/postcss
+[33ma9c4f88[m Add @tailwindcss/postcss dependency
+[33m473fd16[m Fix globals.css imports
+[33m73bb3d0[m Move globals.css to root app folder
+[33m28bd7d0[m Fix root layout and globals import
+[33mf237236[m Fix globals.css path
+[33mfff6b49[m Improve mobile layout
+[33mced5ccd[m Add root redirect to default language
+[33m46aa3ce[m Fix TSX imports (remove .tsx extension)
+[33mc41fe2e[m Fix Next 16 lang layout params + html lang/dir
+[33m1e21a87[m Update
+[33meb7e220[m Initial commit from Create Next App

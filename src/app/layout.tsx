@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import SideMenu from "@/components/SideMenu"; // ✅ أضفناه
 
 export const metadata: Metadata = {
-  title: "Chemistry Horizons 2026",
+  title: "Chemistry Horizons ",
   description: "Chemistry Horizons: Innovation for a Sustainable Future",
 };
 
@@ -20,6 +21,9 @@ export default function RootLayout({
           background: "#f4f6f9",
         }}
       >
+        {/* ✅ القائمة الجانبية */}
+        <SideMenu />
+
         <header
           style={{
             display: "flex",
@@ -64,7 +68,7 @@ export default function RootLayout({
             </p>
           </div>
 
-          {/* شعار المؤتمر (مكبر + ظل خفيف) */}
+          {/* شعار المؤتمر */}
           <Image
             src="/conference.png"
             alt="Conference Logo"
