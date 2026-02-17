@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+// إذا عندك clearSession موجودة سابقاً بالمشروع اتركها، وإذا لا موجودة احذف السطرين الجايين
+// import { clearSession } from "@/lib/session";
+
 function getLangBase(pathname: string) {
-  // يدعم /ar/... أو /en/... وإذا ما عندك lang يرجع ""
   const parts = (pathname || "/").split("/").filter(Boolean);
   const first = parts[0] || "";
   if (first.length === 2) return "/" + first; // ar/en
@@ -14,18 +16,20 @@ function getLangBase(pathname: string) {
 
 export default function SideMenu() {
   const pathname = usePathname() || "/";
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const base = useMemo(() => getLangBase(pathname), [pathname]);
+  const isRtl = base === "/ar" || true; // عندك RTL أساساً
 
-  // استثناء صفحة التسجيل (سواء مع lang أو بدون)
+  // استثناء صفحة التسجيل
   const isRegister =
     pathname === "/register" ||
     pathname.startsWith("/register/") ||
     pathname === `${base}/register` ||
     pathname.startsWith(`${base}/register/`);
 
-  // اغلق السايدبار عند تغيير الصفحة
+  // اقفل السايدبار عند تغيير الصفحة
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -47,15 +51,31 @@ export default function SideMenu() {
     { href: `${base}/poster-vote`, label: "Poster Vote" },
     { href: `${base}/evaluation`, label: "Evaluation" },
     { href: `${base}/sponsors`, label: "Sponsors" },
-    { href: `${base}/lunch`, label: "Lunch" },
+    // ✅ Lunch هي نفسها دعوة الغداء
+    { href: `${base}/lunch`, label: "Lunch Invitation" },
   ];
 
-  const isRtl = base === "/ar"; // لو عندك عربي/إنجليزي
+  function logout() {
+    try {
+      // إذا عندك clearSession() استخدمه:
+      // clearSession();
+
+      // بديل عام: امسح أي session من التخزين
+      localStorage.removeItem("session");
+      localStorage.removeItem("conf_session");
+      localStorage.removeItem("user");
+      localStorage.removeItem("email");
+    } catch {}
+
+    setOpen(false);
+    router.push(`${base}/`);
+    router.refresh?.();
+  }
 
   return (
-    <>
-      {/* زر فتح السايدبار */}
-      <div style={{ display: "flex", justifyContent: isRtl ? "flex-end" : "flex-start", padding: "12px 12px 0" }}>
+    <div style={{ padding: "12px 60px 0" }}>
+      {/* ✅ زر فتح القائمة الآن يظهر حيث تضع الكومبوننت (تحت الهيدر) */}
+      <div style={{ display: "flex", justifyContent: "flex-start" }}>
         <button
           onClick={() => setOpen(true)}
           style={{
@@ -113,7 +133,9 @@ export default function SideMenu() {
         aria-hidden={!open}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ fontWeight: 800, fontSize: 18, color: "#0f172a" }}>Conference Menu</div>
+          <div style={{ fontWeight: 800, fontSize: 18, color: "#0f172a" }}>
+            Conference Menu
+          </div>
           <button
             onClick={() => setOpen(false)}
             style={{
@@ -145,7 +167,7 @@ export default function SideMenu() {
                   color: active ? "white" : "#0f172a",
                   background: active ? "#0f172a" : "#f1f5f9",
                   fontWeight: 700,
-                  textAlign: isRtl ? "right" : "left",
+                  textAlign: "right",
                 }}
               >
                 {l.label}
@@ -154,10 +176,28 @@ export default function SideMenu() {
           })}
         </nav>
 
-        <div style={{ marginTop: "auto", fontSize: 12, color: "#64748b" }}>
+        {/* ✅ زر الخروج داخل القائمة */}
+        <button
+          onClick={logout}
+          style={{
+            marginTop: "auto",
+            padding: "10px 12px",
+            borderRadius: 10,
+            border: "1px solid #ef4444",
+            background: "white",
+            color: "#ef4444",
+            fontWeight: 800,
+            cursor: "pointer",
+            textAlign: "right",
+          }}
+        >
+          ⎋ Logout
+        </button>
+
+        <div style={{ fontSize: 12, color: "#64748b", marginTop: 8 }}>
           Tip: Press <b>ESC</b> to close.
         </div>
       </aside>
-    </>
+    </div>
   );
 }

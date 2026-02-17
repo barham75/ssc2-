@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import SideMenu from "@/components/SideMenu"; // ✅ أضفناه
+import SideMenu from "@/components/SideMenu";
 
 export const metadata: Metadata = {
   title: "Chemistry Horizons ",
@@ -21,9 +21,6 @@ export default function RootLayout({
           background: "#f4f6f9",
         }}
       >
-        {/* ✅ القائمة الجانبية */}
-        <SideMenu />
-
         <header
           style={{
             display: "flex",
@@ -34,7 +31,6 @@ export default function RootLayout({
             borderBottom: "5px solid #002b5c",
           }}
         >
-          {/* شعار الجامعة */}
           <Image
             src="/jerash.png"
             alt="University Logo"
@@ -43,7 +39,6 @@ export default function RootLayout({
             priority
           />
 
-          {/* عنوان المؤتمر */}
           <div style={{ textAlign: "center", maxWidth: 700 }}>
             <h1
               style={{
@@ -68,7 +63,6 @@ export default function RootLayout({
             </p>
           </div>
 
-          {/* شعار المؤتمر */}
           <Image
             src="/conference.png"
             alt="Conference Logo"
@@ -80,6 +74,9 @@ export default function RootLayout({
             }}
           />
         </header>
+
+        {/* ✅ القائمة الآن تحت الهيدر */}
+        <SideMenu />
 
         <main style={{ padding: "40px" }}>{children}</main>
       </body>
