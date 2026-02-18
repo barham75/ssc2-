@@ -34,7 +34,10 @@ function t(lang: string) {
     sponsors: "الداعمون / Sponsors",
     lunch: "دعوة الغداء / Lunch Invitation",
 
-    // ✅ جديد: صفحة المنظمون (تفتح secret-checkin)
+    // ✅ NEW: صفحة الملخصات
+    abstracts: "الملخصات / Abstracts",
+
+    // ✅ صفحة المنظمون
     organizers: ar ? "المنظمون / Organizers" : "Organizers / المنظمون",
   };
 }
@@ -95,10 +98,14 @@ export default function HomeClient({ lang }: { lang: string }) {
         <Card href={`/${lang}/program`} title={L.program} />
         <Card href={`/${lang}/poster-vote`} title={L.vote} />
         <Card href={`/${lang}/evaluation`} title={L.eval} />
+
+        {/* ✅ NEW: الملخصات */}
+        <Card href={`/${lang}/abstracts`} title={L.abstracts} />
+
         <Card href={`/${lang}/sponsors`} title={L.sponsors} />
         <Card href={`/${lang}/lunch-invite`} title={L.lunch} />
 
-        {/* ✅ جديد: المنظمون -> نفس صفحة secret-checkin */}
+        {/* ✅ المنظمون -> نفس صفحة secret-checkin */}
         <Card href={`/${lang}/secret-checkin`} title={L.organizers} />
       </div>
 

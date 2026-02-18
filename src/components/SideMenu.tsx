@@ -48,10 +48,14 @@ export default function SideMenu() {
     { href: `${base}/program`, label: "برنامج المؤتمر / Conference Program" },
     { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر / Best Poster Vote" },
     { href: `${base}/evaluation`, label: "تقييم المؤتمر / Conference Evaluation" },
+
+    // ✅ NEW: صفحة الملخصات
+    { href: `${base}/abstracts`, label: "الملخصات / Abstracts" },
+
     { href: `${base}/sponsors`, label: "الداعمون / Sponsors" },
     { href: `${base}/lunch-invite`, label: "دعوة الغداء / Lunch Invitation" },
 
-    // ✅ جديد: صفحة المنظمون (تفتح secret-checkin)
+    // ✅ صفحة المنظمون (كما هي عندك)
     { href: `${base}/secret-checkin`, label: "المنظمون / Organizers" },
   ];
 
