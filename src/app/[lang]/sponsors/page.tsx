@@ -14,6 +14,7 @@ type Sponsor = {
 };
 
 const SPONSORS: Sponsor[] = [
+  // 1) Platinum
   {
     id: "s1",
     tier: "platinum",
@@ -21,6 +22,8 @@ const SPONSORS: Sponsor[] = [
     nameEn: "Alyaser Co.",
     logo: "/sponsors/Sponsorship1.jpg",
   },
+
+  // 2) Gold
   {
     id: "s2",
     tier: "gold",
@@ -28,9 +31,17 @@ const SPONSORS: Sponsor[] = [
     nameEn: "GreenField Nutritions",
     logo: "/sponsors/Sponsorship2.jpg",
   },
-  // أضف هنا Silver/Bronze
-];
 
+  // 3) Silver (Compass) ✅
+  {
+    id: "s3",
+    tier: "silver",
+    nameAr: "Compass",
+    nameEn: "Compass",
+    // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
+    logo: "/sponsors/compass.jpg",
+  },
+];
 function labels(lang: string) {
   const ar = lang === "ar";
   return {
