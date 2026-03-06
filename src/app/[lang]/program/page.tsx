@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import BottomNav from "@/components/BottomNav";
 import { loadSession } from "@/lib/session";
 
 type ProgramRow = {
@@ -38,6 +37,7 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
 
   useEffect(() => {
     const s = loadSession();
+
     if (!s) {
       router.push(`/${lang}/register`);
       return;
@@ -47,7 +47,14 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
       try {
         const res = await fetch("/api/program", { method: "POST" });
         const data = await res.json();
-        if (data?.ok) setRows(data.rows || []);
+
+        console.log("PROGRAM:", data);
+
+        if (data?.ok) {
+          setRows(data.rows || []);
+        }
+      } catch (err) {
+        console.error("PROGRAM ERROR:", err);
       } finally {
         setLoading(false);
       }
@@ -56,7 +63,14 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
 
   return (
     <div>
-      <div style={{ maxWidth: 980, margin: "0 auto", padding: 16, paddingBottom: 90 }}>
+      <div
+        style={{
+          maxWidth: 980,
+          margin: "0 auto",
+          padding: 16,
+          paddingBottom: 40,
+        }}
+      >
         <h2 style={{ textAlign: "center", marginTop: 10 }}>{L.title}</h2>
 
         {loading ? (
@@ -64,8 +78,14 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
         ) : rows.length === 0 ? (
           <p style={{ textAlign: "center" }}>{L.empty}</p>
         ) : (
-          <div style={{ overflowX: "auto", marginTop: 16 }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 720 }}>
+          <div style={{ overflowX: "auto", marginTop: 20 }}>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                minWidth: 720,
+              }}
+            >
               <thead>
                 <tr>
                   <th style={th}>{L.day}</th>
@@ -75,22 +95,32 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
                   <th style={th}>{L.room}</th>
                 </tr>
               </thead>
+
               <tbody>
                 {rows.map((r, i) => (
                   <tr key={i}>
                     <td style={td}>{String(r.day ?? "")}</td>
+
                     <td style={td}>{String(r.time ?? "")}</td>
+
                     <td style={td}>
-                      <div style={{ fontWeight: 900 }}>
-                        {lang === "ar" ? String(r.titleAr ?? "") : String(r.titleEn ?? "")}
+                      <div style={{ fontWeight: 700 }}>
+                        {lang === "ar"
+                          ? String(r.titleAr ?? "")
+                          : String(r.titleEn ?? "")}
                       </div>
+
                       {lang === "ar" ? (
-                        r.titleEn ? <div style={{ opacity: 0.7 }}>{r.titleEn}</div> : null
+                        r.titleEn ? (
+                          <div style={{ opacity: 0.7 }}>{r.titleEn}</div>
+                        ) : null
                       ) : r.titleAr ? (
                         <div style={{ opacity: 0.7 }}>{r.titleAr}</div>
                       ) : null}
                     </td>
+
                     <td style={td}>{String(r.speaker ?? "")}</td>
+
                     <td style={td}>{String(r.room ?? "")}</td>
                   </tr>
                 ))}
@@ -99,8 +129,6 @@ export default function ProgramPage({ params }: { params: { lang: string } }) {
           </div>
         )}
       </div>
-
-      <BottomNav lang={lang} />
     </div>
   );
 }
@@ -110,7 +138,7 @@ const th: React.CSSProperties = {
   padding: 10,
   textAlign: "start",
   background: "#fafafa",
-  fontWeight: 900,
+  fontWeight: 800,
 };
 
 const td: React.CSSProperties = {
@@ -118,4 +146,3 @@ const td: React.CSSProperties = {
   padding: 10,
   verticalAlign: "top",
 };
-
