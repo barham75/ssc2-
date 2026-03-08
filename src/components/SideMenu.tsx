@@ -163,7 +163,7 @@ export default function SideMenu() {
         <button
           onClick={logout}
           style={{
-            marginTop: "auto",
+            marginTop: "10px",
             width: "100%",
             padding: "6px",
             border: "1px solid #ef4444",
