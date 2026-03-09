@@ -48,7 +48,7 @@ const SPONSORS: Sponsor[] = [
     nameAr: "الباسور",
     nameEn: "passore",
     // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
-logo: "/sponsers/Sponsorship1.jpg",    
+logo: "/sponsors/Sponsorship1.jpg",    
   },
 
 ];
