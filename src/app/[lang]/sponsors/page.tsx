@@ -41,6 +41,16 @@ const SPONSORS: Sponsor[] = [
     // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
     logo: "/sponsors/compass.jpg",
   },
+  // 4) Bronze (Passore) ✅
+  {
+    id: "s4",
+    tier: "bronze",
+    nameAr: "الباسور",
+    nameEn: "passore",
+    // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
+logo: "/sponsers/Sponsorship1.jpg",    
+  },
+
 ];
 function labels(lang: string) {
   const ar = lang === "ar";
