@@ -45,7 +45,7 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s4",
     tier: "bronze",
-    nameAr: "الباسور",
+    nameAr: "الياسور",
     nameEn: "Al-Yassor",
     // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
 logo: "/sponsors/Sponsorship1.jpg",    
