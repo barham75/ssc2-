@@ -18,7 +18,7 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s1",
     tier: "platinum",
-    nameAr: "الجمعية الكيميائية الاردنية فرع الاردن",
+    nameAr: "الجمعية الكيميائية الامريكية فرع الاردن",
     nameEn: "",
     logo: "/sponsors/ACS Jordan Chapter .jpg",
   },
