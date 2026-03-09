@@ -27,7 +27,7 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s2",
     tier: "gold",
-    nameAr: "GreenField Nutritions",
+    nameAr: "",
     nameEn: "GreenField Nutritions",
     logo: "/sponsors/Sponsorship2.jpg",
   },
@@ -36,7 +36,7 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s3",
     tier: "silver",
-    nameAr: "Compass",
+    nameAr: "البوصلة",
     nameEn: "Compass",
     // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
     logo: "/sponsors/compass.jpg",
@@ -46,7 +46,7 @@ const SPONSORS: Sponsor[] = [
     id: "s4",
     tier: "bronze",
     nameAr: "الباسور",
-    nameEn: "passore",
+    nameEn: "Al-Yassor",
     // انتبه: الامتداد .jpeg والاسم فيه مسافات (لازم يكون مطابق 100%)
 logo: "/sponsors/Sponsorship1.jpg",    
   },
