@@ -18,9 +18,9 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s1",
     tier: "platinum",
-    nameAr: "شركة الياسر",
-    nameEn: "Alyaser Co.",
-    logo: "/sponsors/Sponsorship1.jpg",
+    nameAr: "الجمعية الكيميائية الاردنية فرع الاردن",
+    nameEn: "",
+    logo: "/sponsors/ACS Jordan Chapter .jpg",
   },
 
   // 2) Gold
