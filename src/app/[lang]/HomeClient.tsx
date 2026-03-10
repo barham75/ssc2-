@@ -37,6 +37,9 @@ function t(lang: string) {
     // ✅ NEW: صفحة الملخصات
     abstracts: "الملخصات / Abstracts",
 
+    // ✅ NEW: صفحة فيديوهات البوسترات
+    posterVideos: "فيديوهات البوسترات / Poster Videos",
+
     // ✅ صفحة المنظمون
     organizers: ar ? "المنظمون / Organizers" : "Organizers / المنظمون",
   };
@@ -101,6 +104,9 @@ export default function HomeClient({ lang }: { lang: string }) {
 
         {/* ✅ NEW: الملخصات */}
         <Card href={`/${lang}/abstracts`} title={L.abstracts} />
+
+        {/* ✅ NEW: فيديوهات البوسترات */}
+        <Card href={`/${lang}/poster-videos`} title={L.posterVideos} />
 
         <Card href={`/${lang}/sponsors`} title={L.sponsors} />
         <Card href={`/${lang}/lunch-invite`} title={L.lunch} />

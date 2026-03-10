@@ -42,7 +42,7 @@ export default function SideMenu() {
 
   if (isRegister) return null;
 
-  // ✅ عناوين القائمة باللغتين (نصوص صحيحة بدل أسماء المسارات)
+  // ✅ عناوين القائمة باللغتين
   const links = [
     { href: `${base}/`, label: "الرئيسية / Home" },
     { href: `${base}/program`, label: "برنامج المؤتمر / Conference Program" },
@@ -52,10 +52,13 @@ export default function SideMenu() {
     // ✅ NEW: صفحة الملخصات
     { href: `${base}/abstracts`, label: "الملخصات / Abstracts" },
 
+    // ✅ NEW: صفحة فيديوهات البوسترات
+    { href: `${base}/poster-videos`, label: "فيديوهات البوسترات / Poster Videos" },
+
     { href: `${base}/sponsors`, label: "الداعمون / Sponsors" },
     { href: `${base}/lunch-invite`, label: "دعوة الغداء / Lunch Invitation" },
 
-    // ✅ صفحة المنظمون (كما هي عندك)
+    // ✅ صفحة المنظمون
     { href: `${base}/secret-checkin`, label: "المنظمون / Organizers" },
   ];
 
