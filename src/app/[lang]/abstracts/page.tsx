@@ -32,6 +32,7 @@ function t(lang: string) {
     type: ar ? "نوع المشاركة" : "Participation Type",
     spec: ar ? "التخصص" : "Specialization",
     view: ar ? "عرض الملخص" : "View Abstract",
+    download: ar ? "تحميل الملخص" : "Download Abstract",
   };
 }
 
@@ -79,7 +80,6 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
 
         setRows(normalized);
 
-        // reset
         setSelectedName(ALL);
         setSelectedSpec(ALL);
       } catch (e: any) {
@@ -96,32 +96,27 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
     };
   }, [L.error]);
 
-  // 🔗 قائمة الأسماء تعتمد على التخصص المختار
   const nameOptions = useMemo(() => {
     const base = selectedSpec === ALL ? rows : rows.filter((r) => r.specialization === selectedSpec);
     return uniqSorted(base.map((r) => r.name));
   }, [rows, selectedSpec]);
 
-  // 🔗 قائمة التخصص تعتمد على الاسم المختار
   const specOptions = useMemo(() => {
     const base = selectedName === ALL ? rows : rows.filter((r) => r.name === selectedName);
     return uniqSorted(base.map((r) => r.specialization));
   }, [rows, selectedName]);
 
-  // ✅ إذا الخيار الحالي صار غير صالح بعد تحديث الخيارات -> رجعه ALL
   useEffect(() => {
     if (selectedName !== ALL && !nameOptions.includes(selectedName)) {
       setSelectedName(ALL);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nameOptions]);
+  }, [nameOptions, selectedName]);
 
   useEffect(() => {
     if (selectedSpec !== ALL && !specOptions.includes(selectedSpec)) {
       setSelectedSpec(ALL);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [specOptions]);
+  }, [specOptions, selectedSpec]);
 
   const filtered = useMemo(() => {
     return rows.filter((r) => {
@@ -135,7 +130,6 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
     <main style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
       <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 12 }}>{L.title}</h1>
 
-      {/* Filters */}
       <div
         style={{
           border: "1px solid #e5e5e5",
@@ -153,7 +147,6 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
             gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
           }}
         >
-          {/* تخصص */}
           <select
             value={selectedSpec}
             onChange={(e) => setSelectedSpec(e.target.value)}
@@ -175,7 +168,6 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
             ))}
           </select>
 
-          {/* اسم */}
           <select
             value={selectedName}
             onChange={(e) => setSelectedName(e.target.value)}
@@ -228,26 +220,43 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
                 <b>{L.type}:</b> {r.type || "-"}
               </div>
 
-              <div style={{ marginBottom: 10 }}>
+              <div style={{ marginBottom: 12 }}>
                 <b>{L.spec}:</b> {r.specialization || "-"}
               </div>
 
               {r.url ? (
-                <a
-                  href={r.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    display: "inline-block",
-                    padding: "8px 12px",
-                    borderRadius: 12,
-                    border: "1px solid #ccc",
-                    textDecoration: "none",
-                    fontWeight: 700,
-                  }}
-                >
-                  {L.view}
-                </a>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  <a
+                    href={r.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: "inline-block",
+                      padding: "8px 12px",
+                      borderRadius: 12,
+                      border: "1px solid #ccc",
+                      textDecoration: "none",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {L.view}
+                  </a>
+
+                  <a
+                    href={r.url}
+                    download
+                    style={{
+                      display: "inline-block",
+                      padding: "8px 12px",
+                      borderRadius: 12,
+                      border: "1px solid #ccc",
+                      textDecoration: "none",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {L.download}
+                  </a>
+                </div>
               ) : (
                 <span style={{ opacity: 0.7 }}>-</span>
               )}
