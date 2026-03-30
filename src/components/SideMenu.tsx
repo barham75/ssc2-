@@ -4,12 +4,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-/* تحديد اللغة الحالية من المسار */
 function detectBase(pathname: string) {
   const p = pathname || "/";
   if (p === "/ar" || p.startsWith("/ar/")) return "/ar";
   if (p === "/en" || p.startsWith("/en/")) return "/en";
-  return "/ar"; // اللغة الافتراضية
+  return "/ar";
 }
 
 export default function SideMenu() {
@@ -19,7 +18,6 @@ export default function SideMenu() {
 
   const base = useMemo(() => detectBase(pathname), [pathname]);
 
-  /* استثناء صفحة التسجيل */
   const isRegister =
     pathname === "/register" ||
     pathname.startsWith("/register/") ||
@@ -42,23 +40,16 @@ export default function SideMenu() {
 
   if (isRegister) return null;
 
-  // ✅ عناوين القائمة باللغتين
   const links = [
     { href: `${base}/`, label: "الرئيسية / Home" },
     { href: `${base}/program`, label: "برنامج المؤتمر / Conference Program" },
     { href: `${base}/poster-vote`, label: "تصويت أفضل بوستر / Best Poster Vote" },
     { href: `${base}/evaluation`, label: "تقييم المؤتمر / Conference Evaluation" },
-
-    // ✅ NEW: صفحة الملخصات
     { href: `${base}/abstracts`, label: "الملخصات / Abstracts" },
-
-    // ✅ NEW: صفحة فيديوهات البوسترات
     { href: `${base}/poster-videos`, label: "فيديوهات البوسترات / Poster Videos" },
-
     { href: `${base}/sponsors`, label: "الداعمون / Sponsors" },
     { href: `${base}/lunch-invite`, label: "دعوة الغداء / Lunch Invitation" },
-
-    // ✅ صفحة المنظمون
+    { href: `${base}/certificate`, label: "شهادة الحضور / Attendance Certificate" },
     { href: `${base}/secret-checkin`, label: "المنظمون / Organizers" },
   ];
 
@@ -72,7 +63,6 @@ export default function SideMenu() {
 
   return (
     <>
-      {/* زر القائمة تحت الهيدر */}
       <div style={{ padding: "12px 20px" }}>
         <button
           onClick={() => setOpen(true)}
@@ -90,7 +80,6 @@ export default function SideMenu() {
         </button>
       </div>
 
-      {/* Overlay */}
       {open && (
         <div
           onClick={() => setOpen(false)}
@@ -103,7 +92,6 @@ export default function SideMenu() {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         style={{
           position: "fixed",
@@ -124,7 +112,6 @@ export default function SideMenu() {
         }}
         aria-hidden={!open}
       >
-        {/* زر الإغلاق */}
         <button
           onClick={() => setOpen(false)}
           style={{
@@ -140,7 +127,6 @@ export default function SideMenu() {
           ✕
         </button>
 
-        {/* روابط القائمة */}
         {links.map((l) => (
           <Link
             key={l.href}
@@ -162,7 +148,6 @@ export default function SideMenu() {
           </Link>
         ))}
 
-        {/* ✅ زر الخروج: آخر خيار بأسفل القائمة */}
         <button
           onClick={logout}
           style={{

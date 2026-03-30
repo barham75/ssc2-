@@ -8,7 +8,6 @@ import { loadSession } from "@/lib/session";
 type SessionShape = {
   email?: string;
   name?: string;
-  fullName?: string;
   regNo?: string;
   org?: string;
   lunchToken?: string;
@@ -17,9 +16,7 @@ type SessionShape = {
 function t(lang: string) {
   const ar = lang === "ar";
 
-  // ✅ العناوين باللغتين دائمًا
   return {
-    // ✅ بدل "مرحبا" -> "Welcome" دائمًا
     welcome: "Welcome",
 
     regNo: ar ? "رقم التسجيل / Registration No" : "Registration No / رقم التسجيل",
@@ -33,15 +30,10 @@ function t(lang: string) {
     eval: "تقييم المؤتمر / Conference Evaluation",
     sponsors: "الداعمون / Sponsors",
     lunch: "دعوة الغداء / Lunch Invitation",
-
-    // ✅ NEW: صفحة الملخصات
     abstracts: "الملخصات / Abstracts",
-
-    // ✅ NEW: صفحة فيديوهات البوسترات
     posterVideos: "فيديوهات البوسترات / Poster Videos",
-
-    // ✅ صفحة المنظمون
     organizers: ar ? "المنظمون / Organizers" : "Organizers / المنظمون",
+    certificate: "شهادة الحضور / Attendance Certificate",
   };
 }
 
@@ -53,21 +45,22 @@ export default function HomeClient({ lang }: { lang: string }) {
 
   useEffect(() => {
     const s = loadSession() as SessionShape | null;
+
     if (!s) {
       router.push(`/${lang}/register`);
       return;
     }
+
     setSession(s);
   }, [lang, router]);
 
   if (!session) return null;
 
-  const displayName = String(session.name || session.fullName || "").trim();
+  const displayName = String(session.name || "").trim();
   const regNo = String(session.regNo || "").trim();
 
   return (
     <div style={{ maxWidth: 980, margin: "0 auto", padding: 16 }}>
-      {/* ترحيب + الاسم + رقم التسجيل */}
       <div style={{ textAlign: "center", marginTop: 10 }}>
         <div style={{ fontSize: 22, fontWeight: 900 }}>
           {L.welcome} {displayName || L.participant}
@@ -78,18 +71,23 @@ export default function HomeClient({ lang }: { lang: string }) {
             {L.regNo}: <span style={{ fontWeight: 900 }}>{regNo}</span>
           </div>
         ) : (
-          <div style={{ marginTop: 6, fontSize: 16, color: "#b00020", fontWeight: 900 }}>
+          <div
+            style={{
+              marginTop: 6,
+              fontSize: 16,
+              color: "#b00020",
+              fontWeight: 900,
+            }}
+          >
             {L.notRegistered}
           </div>
         )}
       </div>
 
-      {/* عناوين الصفحات */}
       <h3 style={{ textAlign: "center", marginTop: 24, marginBottom: 12 }}>
         {L.menuTitle}
       </h3>
 
-      {/* شبكة الروابط */}
       <div
         style={{
           display: "grid",
@@ -101,21 +99,13 @@ export default function HomeClient({ lang }: { lang: string }) {
         <Card href={`/${lang}/program`} title={L.program} />
         <Card href={`/${lang}/poster-vote`} title={L.vote} />
         <Card href={`/${lang}/evaluation`} title={L.eval} />
-
-        {/* ✅ NEW: الملخصات */}
         <Card href={`/${lang}/abstracts`} title={L.abstracts} />
-
-        {/* ✅ NEW: فيديوهات البوسترات */}
         <Card href={`/${lang}/poster-videos`} title={L.posterVideos} />
-
         <Card href={`/${lang}/sponsors`} title={L.sponsors} />
         <Card href={`/${lang}/lunch-invite`} title={L.lunch} />
-
-        {/* ✅ المنظمون -> نفس صفحة secret-checkin */}
+        <Card href={`/${lang}/certificate`} title={L.certificate} />
         <Card href={`/${lang}/secret-checkin`} title={L.organizers} />
       </div>
-
-      {/* لا يوجد Footer هنا */}
     </div>
   );
 }
