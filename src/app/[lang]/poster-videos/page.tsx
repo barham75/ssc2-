@@ -26,58 +26,96 @@ export default async function PosterVideosPage({
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
+      {/* العنوان */}
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold">{tx.title}</h1>
         <p className="mt-2 text-gray-600">{tx.subtitle}</p>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-        <div className="hidden grid-cols-12 gap-4 border-b bg-gray-50 px-4 py-3 text-sm font-semibold md:grid">
-          <div className="col-span-2">{tx.posterNo}</div>
-          <div className="col-span-3">{tx.researcher}</div>
-          <div className="col-span-5">{tx.posterTitle}</div>
-          <div className="col-span-2 text-center">{tx.open}</div>
-        </div>
+      {/* رأس الجدول */}
+      <div className="hidden grid-cols-12 gap-4 rounded-2xl border bg-gray-50 px-4 py-3 text-sm font-semibold md:grid">
+        <div className="col-span-2">{tx.posterNo}</div>
+        <div className="col-span-3">{tx.researcher}</div>
+        <div className="col-span-5">{tx.posterTitle}</div>
+        <div className="col-span-2 text-center">{tx.open}</div>
+      </div>
 
-        <div className="divide-y">
-          {POSTERS.map((poster) => (
-            <div
-              key={poster.id}
-              className="grid grid-cols-1 gap-3 px-4 py-4 md:grid-cols-12 md:items-center"
-            >
-              <div className="md:col-span-2">
-                <Link
-                  href={`/${lang}/poster-videos/${poster.id}`}
-                  className="inline-block rounded-lg bg-blue-50 px-3 py-2 font-semibold text-blue-700 hover:bg-blue-100"
-                >
-                  {poster.id.toUpperCase()}
-                </Link>
-              </div>
-
-              <div className="md:col-span-3">
-                <Link
-                  href={`/${lang}/poster-videos/${poster.id}`}
-                  className="font-medium text-gray-900 hover:text-blue-700"
-                >
-                  {isAr ? poster.researcherAr : poster.researcherEn}
-                </Link>
-              </div>
-
-              <div className="md:col-span-5 text-gray-700">
-                {isAr ? poster.titleAr : poster.titleEn}
-              </div>
-
-              <div className="md:col-span-2 md:text-center">
-                <Link
-                  href={`/${lang}/poster-videos/${poster.id}`}
-                  className="inline-block rounded-xl bg-black px-4 py-2 text-white hover:opacity-90"
-                >
-                  {tx.open}
-                </Link>
-              </div>
+      {/* قائمة البوسترات */}
+      <div className="mt-4 space-y-4">
+        {POSTERS.map((poster) => (
+          <div
+            key={poster.id}
+            className="
+              grid grid-cols-1 gap-3
+              px-4 py-6
+              md:grid-cols-12 md:items-center
+              rounded-2xl
+              border
+              bg-white
+              shadow-sm
+              hover:shadow-md
+              transition
+            "
+          >
+            {/* رقم البوستر */}
+            <div className="md:col-span-2">
+              <Link
+                href={`/${lang}/poster-videos/${poster.id}`}
+                className="
+                  inline-block
+                  rounded-lg
+                  bg-blue-50
+                  px-3 py-2
+                  font-semibold
+                  text-blue-700
+                  hover:bg-blue-100
+                "
+              >
+                {poster.id.toUpperCase()}
+              </Link>
             </div>
-          ))}
-        </div>
+
+            {/* اسم الباحث */}
+            <div className="md:col-span-3">
+              <Link
+                href={`/${lang}/poster-videos/${poster.id}`}
+                className="
+                  font-medium
+                  text-gray-900
+                  hover:text-blue-700
+                "
+              >
+                {isAr
+                  ? poster.researcherAr
+                  : poster.researcherEn}
+              </Link>
+            </div>
+
+            {/* عنوان البوستر */}
+            <div className="md:col-span-5 text-gray-700">
+              {isAr
+                ? poster.titleAr
+                : poster.titleEn}
+            </div>
+
+            {/* زر عرض الفيديو */}
+            <div className="md:col-span-2 md:text-center">
+              <Link
+                href={`/${lang}/poster-videos/${poster.id}`}
+                className="
+                  inline-block
+                  rounded-xl
+                  bg-black
+                  px-4 py-2
+                  text-white
+                  hover:opacity-90
+                "
+              >
+                {tx.open}
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </main>
   );
