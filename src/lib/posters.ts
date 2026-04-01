@@ -10,27 +10,38 @@ export type PosterItem = {
 export const POSTERS: PosterItem[] = [
   {
     id: "p1",
-    titleAr: "عنوان البوستر 1",
-    titleEn: "Poster Title 1",
-    researcherAr: "اسم الباحث 1",
-    researcherEn: "Researcher 1",
-    videoUrl: "https://www.youtube.com/embed/VIDEO_ID_1",
+    titleAr: "Novel corrosion For Copper in 1M HCl",
+    titleEn: "Novel corrosion For Copper in 1M HCl",
+    researcherAr: "Qusai Khamaiseh",
+    researcherEn: "Qusai Khamaiseh",
+
+    // تم تحويل الرابط إلى preview
+    videoUrl:
+      "https://drive.google.com/file/d/1DsuVpIqRjzK-amXl8yyvPPO1Bn88k0Mt/preview",
   },
+
   {
     id: "p2",
-    titleAr: "عنوان البوستر 2",
-    titleEn: "Poster Title 2",
-    researcherAr: "اسم الباحث 2",
-    researcherEn: "Researcher 2",
-    videoUrl: "https://www.youtube.com/embed/VIDEO_ID_2",
+    titleAr: "Synthesis, Characterization, and Biological Activities of N-Arylacetamide with Mercapto Triazole Starting from Nalidixic acid.",
+    titleEn:
+      "Synthesis, Characterization, and Biological Activities of N-Arylacetamide with Mercapto Triazole Starting from Nalidixic acid.",
+    researcherAr: "Aya Jamil Jaber",
+    researcherEn: "Aya Jamil Jaber",
+
+    // تم تحويل الرابط إلى preview
+    videoUrl:
+      "https://drive.google.com/file/d/1J4n55t3WJA3ZIJFIOSNrPHbkpKmMcRbC/preview",
   },
+
   {
     id: "p3",
     titleAr: "عنوان البوستر 3",
     titleEn: "Poster Title 3",
     researcherAr: "اسم الباحث 3",
     researcherEn: "Researcher 3",
+
     videoUrl: "https://www.youtube.com/embed/VIDEO_ID_3",
   },
-  // أكمل حتى p30
+
+  // أكمل بنفس الطريقة حتى p30
 ];
