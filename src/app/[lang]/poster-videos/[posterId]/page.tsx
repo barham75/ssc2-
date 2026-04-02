@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { POSTERS } from "@/lib/posters";
@@ -15,22 +13,23 @@ function t(lang: string) {
     back: ar ? "العودة إلى فيديوهات البوسترات" : "Back to Poster Videos",
     researcher: ar ? "الباحث" : "Researcher",
     posterTitle: ar ? "عنوان البوستر" : "Poster Title",
-    notFound: ar ? "لم يتم العثور على الفيديو." : "Video not found.",
   };
 }
 
-export default function PosterVideoDetailsPage({
+export default async function PosterVideoDetailsPage({
   params,
 }: {
-  params: { lang: string; posterId: string };
+  params: Promise<{ lang: string; posterId: string }>;
 }) {
-  const lang = params?.lang || "ar";
-  const posterId = params?.posterId || "";
+  const { lang, posterId } = await params;
+
   const ar = isArabic(lang);
   const tx = t(lang);
 
   const poster = POSTERS.find(
-    (item) => item.id.toLowerCase() === posterId.toLowerCase()
+    (item) =>
+      String(item.id).trim().toLowerCase() ===
+      String(posterId).trim().toLowerCase()
   );
 
   if (!poster) {
