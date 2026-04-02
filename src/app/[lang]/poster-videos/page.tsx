@@ -37,13 +37,14 @@ export default function PosterVideosPage({
         minHeight: "100vh",
         background: "#f5f7fb",
         padding: "40px 20px",
-        direction: ar ? "rtl" : "ltr",
       }}
     >
+      {/* ⭐ direction هنا فقط وليس على main */}
       <div
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
+          direction: ar ? "rtl" : "ltr",
         }}
       >
         <div
@@ -77,12 +78,16 @@ export default function PosterVideosPage({
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(320px, 1fr))",
             gap: "22px",
           }}
         >
           {POSTERS.map((poster) => {
-            const posterTitle = ar ? poster.titleAr : poster.titleEn;
+            const posterTitle = ar
+              ? poster.titleAr
+              : poster.titleEn;
+
             const researcherName = ar
               ? poster.researcherAr
               : poster.researcherEn;
@@ -94,16 +99,15 @@ export default function PosterVideosPage({
                   background: "#ffffff",
                   borderRadius: "18px",
                   overflow: "hidden",
-                  padding: "22px",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                  boxShadow:
+                    "0 10px 30px rgba(0,0,0,0.08)",
                   border: "1px solid #e5e7eb",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  transition: "0.2s ease",
                 }}
               >
-                <div>
+                <div style={{ padding: "22px" }}>
                   <div
                     style={{
                       display: "inline-block",
@@ -116,7 +120,8 @@ export default function PosterVideosPage({
                       marginBottom: "18px",
                     }}
                   >
-                    {tx.posterNo}: {poster.id.toUpperCase()}
+                    {tx.posterNo}:{" "}
+                    {poster.id.toUpperCase()}
                   </div>
 
                   <div style={{ marginBottom: "12px" }}>
@@ -130,6 +135,7 @@ export default function PosterVideosPage({
                     >
                       {tx.researcher}
                     </div>
+
                     <div
                       style={{
                         fontSize: "22px",
@@ -168,26 +174,24 @@ export default function PosterVideosPage({
                   </div>
                 </div>
 
-                <div style={{ marginTop: "24px" }}>
-                  <Link
-                    href={`/${lang}/poster-videos/${poster.id}`}
-                    style={{
-                      display: "inline-block",
-                      width: "100%",
-                      textAlign: "center",
-                      background: "#0b3b78",
-                      color: "#ffffff",
-                      padding: "16px 0",
-                      borderRadius: "0",
-                      textDecoration: "none",
-                       margin: "0 auto", 
-                      fontWeight: 700,
-                      fontSize: "16px",
-                    }}
-                  >
-                    {tx.viewVideo}
-                  </Link>
-                </div>
+                {/* الزر */}
+                <Link
+                  href={`/${lang}/poster-videos/${poster.id}`}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "center",
+                    background: "#0b3b78",
+                    color: "#ffffff",
+                    padding: "16px 0",
+                    textDecoration: "none",
+                    fontWeight: 700,
+                    fontSize: "16px",
+                    borderRadius: 0,
+                  }}
+                >
+                  {tx.viewVideo}
+                </Link>
               </div>
             );
           })}
