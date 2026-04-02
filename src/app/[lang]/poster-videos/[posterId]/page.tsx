@@ -1,81 +1,205 @@
+"use client";
+
 import Link from "next/link";
 import { POSTERS } from "@/lib/posters";
 
+function isArabic(lang: string) {
+  return String(lang || "").toLowerCase() === "ar";
+}
+
 function t(lang: string) {
-  const ar = lang === "ar";
+  const ar = isArabic(lang);
+
   return {
     title: ar ? "فيديوهات البوسترات" : "Poster Videos",
     subtitle: ar
-      ? "اضغط على اسم الباحث أو رقم البوستر لعرض الفيديو"
-      : "Click the researcher name or poster number to view the video",
+      ? "اضغط على أي بطاقة لعرض فيديو البوستر"
+      : "Click any card to view the poster video",
     posterNo: ar ? "رقم البوستر" : "Poster No.",
     researcher: ar ? "الباحث" : "Researcher",
     posterTitle: ar ? "عنوان البوستر" : "Poster Title",
-    open: ar ? "عرض الفيديو" : "View Video",
+    viewVideo: ar ? "عرض الفيديو" : "View Video",
   };
 }
 
-export default async function PosterVideosPage({
+export default function PosterVideosPage({
   params,
 }: {
-  params: Promise<{ lang: string }>;
+  params: { lang: string };
 }) {
-  const { lang } = await params;
+  const lang = params?.lang || "ar";
+  const ar = isArabic(lang);
   const tx = t(lang);
-  const isAr = lang === "ar";
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">{tx.title}</h1>
-        <p className="mt-2 text-gray-600">{tx.subtitle}</p>
-      </div>
-
-      <div className="hidden grid-cols-12 gap-4 rounded-2xl border bg-gray-50 px-4 py-3 text-sm font-semibold md:grid">
-        <div className="col-span-2">{tx.posterNo}</div>
-        <div className="col-span-3">{tx.researcher}</div>
-        <div className="col-span-5">{tx.posterTitle}</div>
-        <div className="col-span-2 text-center">{tx.open}</div>
-      </div>
-
-      <div className="mt-6 space-y-6">
-        {POSTERS.map((poster) => (
-          <div
-            key={poster.id}
-            className="grid grid-cols-1 gap-4 rounded-2xl border bg-white px-5 py-6 shadow-sm transition hover:shadow-md md:grid-cols-12 md:items-center"
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#f5f7fb",
+        padding: "40px 16px",
+        overflowX: "hidden",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          direction: ar ? "rtl" : "ltr",
+          width: "100%",
+          overflowX: "hidden",
+        }}
+      >
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "36px",
+          }}
+        >
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "40px",
+              fontWeight: 800,
+              color: "#0b3b78",
+              wordBreak: "break-word",
+            }}
           >
-            <div className="md:col-span-2">
-              <Link
-                href={`/${lang}/poster-videos/${poster.id}`}
-                className="inline-block rounded-lg bg-blue-50 px-3 py-2 font-semibold text-blue-700 hover:bg-blue-100"
-              >
-                {poster.id.toUpperCase()}
-              </Link>
-            </div>
+            {tx.title}
+          </h1>
 
-            <div className="md:col-span-3">
-              <Link
-                href={`/${lang}/poster-videos/${poster.id}`}
-                className="font-medium text-gray-900 hover:text-blue-700"
-              >
-                {isAr ? poster.researcherAr : poster.researcherEn}
-              </Link>
-            </div>
+          <p
+            style={{
+              marginTop: "12px",
+              fontSize: "18px",
+              color: "#4b5563",
+              wordBreak: "break-word",
+            }}
+          >
+            {tx.subtitle}
+          </p>
+        </div>
 
-            <div className="md:col-span-5 text-gray-700">
-              {isAr ? poster.titleAr : poster.titleEn}
-            </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "22px",
+            width: "100%",
+          }}
+        >
+          {POSTERS.map((poster) => {
+            const posterTitle = ar ? poster.titleAr : poster.titleEn;
+            const researcherName = ar
+              ? poster.researcherAr
+              : poster.researcherEn;
 
-            <div className="md:col-span-2 md:text-center">
-              <Link
-                href={`/${lang}/poster-videos/${poster.id}`}
-                className="inline-block rounded-xl bg-black px-4 py-2 text-white hover:opacity-90"
+            return (
+              <div
+                key={poster.id}
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "18px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                  border: "1px solid #e5e7eb",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  minWidth: 0,
+                }}
               >
-                {tx.open}
-              </Link>
-            </div>
-          </div>
-        ))}
+                <div style={{ padding: "22px", minWidth: 0 }}>
+                  <div
+                    style={{
+                      display: "inline-block",
+                      padding: "6px 14px",
+                      borderRadius: "999px",
+                      background: "#e8f0ff",
+                      color: "#0b3b78",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      marginBottom: "18px",
+                      maxWidth: "100%",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {tx.posterNo}: {poster.id.toUpperCase()}
+                  </div>
+
+                  <div style={{ marginBottom: "12px", minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        color: "#6b7280",
+                        marginBottom: "4px",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {tx.researcher}
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: "22px",
+                        fontWeight: 700,
+                        color: "#111827",
+                        lineHeight: 1.5,
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {researcherName}
+                    </div>
+                  </div>
+
+                  <div style={{ marginTop: "18px", minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        color: "#6b7280",
+                        marginBottom: "6px",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {tx.posterTitle}
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: "18px",
+                        color: "#1f2937",
+                        lineHeight: 1.7,
+                        fontWeight: 500,
+                        wordBreak: "break-word",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {posterTitle}
+                    </div>
+                  </div>
+                </div>
+
+                <Link
+                  href={`/${lang}/poster-videos/${poster.id}`}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "center",
+                    background: "#0b3b78",
+                    color: "#ffffff",
+                    padding: "16px 0",
+                    textDecoration: "none",
+                    fontWeight: 700,
+                    fontSize: "16px",
+                    borderRadius: 0,
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {tx.viewVideo}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </main>
   );
