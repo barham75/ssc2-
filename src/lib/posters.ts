@@ -17,7 +17,7 @@ export const POSTERS: PosterItem[] = [
 
     // تم تحويل الرابط إلى preview
     videoUrl:
-      "https://drive.google.com/file/d/1DsuVpIqRjzK-amXl8yyvPPO1Bn88k0Mt/preview",
+      "https://youtube.com/shorts/vfXs4o8vyCQ?si=JtUa9Unz16VbUARn",
   },
 
   {
