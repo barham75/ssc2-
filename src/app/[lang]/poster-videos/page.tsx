@@ -93,6 +93,7 @@ export default function PosterVideosPage({
                 style={{
                   background: "#ffffff",
                   borderRadius: "18px",
+                  overflow: "hidden",
                   padding: "22px",
                   boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
                   border: "1px solid #e5e7eb",
