@@ -177,9 +177,10 @@ export default function PosterVideosPage({
                       textAlign: "center",
                       background: "#0b3b78",
                       color: "#ffffff",
-                      padding: "14px 18px",
-                      borderRadius: "12px",
+                      padding: "16px 0",
+                      borderRadius: "0",
                       textDecoration: "none",
+                       margin: "0 auto", 
                       fontWeight: 700,
                       fontSize: "16px",
                     }}
