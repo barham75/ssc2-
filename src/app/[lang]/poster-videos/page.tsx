@@ -36,15 +36,17 @@ export default function PosterVideosPage({
       style={{
         minHeight: "100vh",
         background: "#f5f7fb",
-        padding: "40px 20px",
+        padding: "40px 16px",
+        overflowX: "hidden",
       }}
     >
-      {/* ⭐ direction هنا فقط وليس على main */}
       <div
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
           direction: ar ? "rtl" : "ltr",
+          width: "100%",
+          overflowX: "hidden",
         }}
       >
         <div
@@ -59,6 +61,7 @@ export default function PosterVideosPage({
               fontSize: "40px",
               fontWeight: 800,
               color: "#0b3b78",
+              wordBreak: "break-word",
             }}
           >
             {tx.title}
@@ -69,6 +72,7 @@ export default function PosterVideosPage({
               marginTop: "12px",
               fontSize: "18px",
               color: "#4b5563",
+              wordBreak: "break-word",
             }}
           >
             {tx.subtitle}
@@ -78,16 +82,13 @@ export default function PosterVideosPage({
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "22px",
+            width: "100%",
           }}
         >
           {POSTERS.map((poster) => {
-            const posterTitle = ar
-              ? poster.titleAr
-              : poster.titleEn;
-
+            const posterTitle = ar ? poster.titleAr : poster.titleEn;
             const researcherName = ar
               ? poster.researcherAr
               : poster.researcherEn;
@@ -99,15 +100,15 @@ export default function PosterVideosPage({
                   background: "#ffffff",
                   borderRadius: "18px",
                   overflow: "hidden",
-                  boxShadow:
-                    "0 10px 30px rgba(0,0,0,0.08)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
                   border: "1px solid #e5e7eb",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
+                  minWidth: 0,
                 }}
               >
-                <div style={{ padding: "22px" }}>
+                <div style={{ padding: "22px", minWidth: 0 }}>
                   <div
                     style={{
                       display: "inline-block",
@@ -118,13 +119,14 @@ export default function PosterVideosPage({
                       fontWeight: 700,
                       fontSize: "14px",
                       marginBottom: "18px",
+                      maxWidth: "100%",
+                      wordBreak: "break-word",
                     }}
                   >
-                    {tx.posterNo}:{" "}
-                    {poster.id.toUpperCase()}
+                    {tx.posterNo}: {poster.id.toUpperCase()}
                   </div>
 
-                  <div style={{ marginBottom: "12px" }}>
+                  <div style={{ marginBottom: "12px", minWidth: 0 }}>
                     <div
                       style={{
                         fontSize: "14px",
@@ -142,13 +144,14 @@ export default function PosterVideosPage({
                         fontWeight: 700,
                         color: "#111827",
                         lineHeight: 1.5,
+                        wordBreak: "break-word",
                       }}
                     >
                       {researcherName}
                     </div>
                   </div>
 
-                  <div style={{ marginTop: "18px" }}>
+                  <div style={{ marginTop: "18px", minWidth: 0 }}>
                     <div
                       style={{
                         fontSize: "14px",
@@ -167,6 +170,7 @@ export default function PosterVideosPage({
                         lineHeight: 1.7,
                         fontWeight: 500,
                         wordBreak: "break-word",
+                        overflowWrap: "anywhere",
                       }}
                     >
                       {posterTitle}
@@ -174,7 +178,6 @@ export default function PosterVideosPage({
                   </div>
                 </div>
 
-                {/* الزر */}
                 <Link
                   href={`/${lang}/poster-videos/${poster.id}`}
                   style={{
@@ -188,6 +191,7 @@ export default function PosterVideosPage({
                     fontWeight: 700,
                     fontSize: "16px",
                     borderRadius: 0,
+                    boxSizing: "border-box",
                   }}
                 >
                   {tx.viewVideo}
