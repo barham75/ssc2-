@@ -23,7 +23,7 @@ function t(lang: string) {
     time: ar ? "الوقت" : "Time",
     session: ar ? "الجلسة" : "Session",
     speaker: ar ? "المتحدث" : "Speaker",
-    room: ar ? "القاعة" : "Room",
+    room: ar ? "الجلسة" : "Room",
 
     filters: ar ? "تصفية البرنامج" : "Program Filters",
     allDays: ar ? "كل الأيام" : "All Days",
