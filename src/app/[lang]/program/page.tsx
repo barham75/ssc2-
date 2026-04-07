@@ -27,10 +27,10 @@ function t(lang: string) {
 
     filters: ar ? "تصفية البرنامج" : "Program Filters",
     allDays: ar ? "كل الأيام" : "All Days",
-    allRooms: ar ? "كل القاعات" : "All Rooms",
+    allRooms: ar ? "كل الجلسات" : "All Rooms",
     search: ar ? "بحث" : "Search",
     searchPlaceholder: ar
-      ? "ابحث في الجلسة أو المتحدث أو القاعة"
+      ? "ابحث في الجلسة أو المتحدث "
       : "Search by session, speaker, or room",
 
     downloadPdf: ar ? "تحميل البرنامج PDF" : "Download Program PDF",
