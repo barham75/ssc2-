@@ -182,7 +182,7 @@ export const POSTERS: PosterItem[] = [
   },
 
   {
-    {
+  
   id: "p17",
   titleAr:
     "Green Synthesis of Zinc Oxide Nanoparticles Using Plant Extracts: Structural, Optical, and Environmental Applications",
