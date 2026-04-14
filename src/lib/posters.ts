@@ -192,7 +192,7 @@ export const POSTERS: PosterItem[] = [
   researcherEn: "Asla A. Al-Zahrani",
 
   videoUrl: "https://www.youtube.com/embed/riMmbERY-rs",
-}
+},
 
   {
     id: "p18",
