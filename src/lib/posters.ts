@@ -182,15 +182,17 @@ export const POSTERS: PosterItem[] = [
   },
 
   {
-    id: "p17",
-    titleAr:
-      "Green Synthesis of Zinc Oxide Nanoparticles",
-    titleEn:
-      "Green Synthesis of Zinc Oxide Nanoparticles",
-    researcherAr: "Asla A. Al-Zahrani",
-    researcherEn: "Asla A. Al-Zahrani",
-    videoUrl: "",
-  },
+    {
+  id: "p17",
+  titleAr:
+    "Green Synthesis of Zinc Oxide Nanoparticles Using Plant Extracts: Structural, Optical, and Environmental Applications",
+  titleEn:
+    "Green Synthesis of Zinc Oxide Nanoparticles Using Plant Extracts: Structural, Optical, and Environmental Applications",
+  researcherAr: "Asla A. Al-Zahrani",
+  researcherEn: "Asla A. Al-Zahrani",
+
+  videoUrl: "https://www.youtube.com/embed/riMmbERY-rs",
+}
 
   {
     id: "p18",
