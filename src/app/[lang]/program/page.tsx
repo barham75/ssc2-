@@ -401,4 +401,7 @@ const inputStyle: React.CSSProperties = {
   border: "1px solid #ccc",
   outline: "none",
   fontSize: 14,
+  boxSizing: "border-box",
+  display: "block",
+  maxWidth: "100%",
 };
