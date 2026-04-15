@@ -227,14 +227,15 @@ export default function ProgramPage({
               {L.filters}
             </div>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns:
-                  "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: 12,
-              }}
-            >
+           <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 12,
+    width: "100%",
+    boxSizing: "border-box",
+  }}
+>
               <select
                 value={selectedDay}
                 onChange={(e) =>
