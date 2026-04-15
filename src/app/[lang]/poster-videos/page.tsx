@@ -24,7 +24,6 @@ export default async function PosterVideosPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-
   const ar = isArabic(lang);
   const tx = t(lang);
 
@@ -36,12 +35,7 @@ export default async function PosterVideosPage({
         padding: "24px 16px",
       }}
     >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <h1
           style={{
             textAlign: "center",
@@ -57,21 +51,19 @@ export default async function PosterVideosPage({
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "20px",
           }}
         >
           {POSTERS.map((poster) => {
-            const posterTitle =
-              ar ? poster.titleAr : poster.titleEn;
-
-            const researcherName =
-              ar ? poster.researcherAr : poster.researcherEn;
+            const posterTitle = ar ? poster.titleAr : poster.titleEn;
+            const researcherName = ar
+              ? poster.researcherAr
+              : poster.researcherEn;
 
             const hasVideo =
-              !!poster.videoUrl &&
-              String(poster.videoUrl).trim() !== "";
+              typeof poster.videoUrl === "string" &&
+              poster.videoUrl.trim() !== "";
 
             return (
               <div
@@ -80,8 +72,7 @@ export default async function PosterVideosPage({
                   background: "#ffffff",
                   borderRadius: "18px",
                   overflow: "hidden",
-                  boxShadow:
-                    "0 10px 30px rgba(0,0,0,0.08)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
                   border: "1px solid #e5e7eb",
                   display: "flex",
                   flexDirection: "column",

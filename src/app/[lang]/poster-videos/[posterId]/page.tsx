@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { POSTERS } from "@/lib/posters";
 
 function isArabic(lang: string) {
@@ -9,23 +10,46 @@ function t(lang: string) {
   const ar = isArabic(lang);
 
   return {
-    pageTitle: ar ? "فيديوهات البوسترات" : "Poster Videos",
-    posterNo: ar ? "رقم البوستر" : "Poster Number",
+    back: ar ? "العودة إلى فيديوهات البوسترات" : "Back to Poster Videos",
     researcher: ar ? "الباحث" : "Researcher",
     posterTitle: ar ? "عنوان البوستر" : "Poster Title",
-    watchVideo: ar ? "عرض الفيديو" : "Watch Video",
-    noVideo: ar ? "لا يوجد فيديو" : "No Video Available",
+    openDirectly: ar ? "فتح الفيديو مباشرة" : "Open Video Directly",
   };
 }
 
-export default async function PosterVideosPage({
+export default async function PosterVideoDetailsPage({
   params,
 }: {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: string; posterId: string }>;
 }) {
-  const { lang } = await params;
+  const { lang, posterId } = await params;
+
   const ar = isArabic(lang);
   const tx = t(lang);
+
+  const poster = POSTERS.find(
+    (item) =>
+      String(item.id).trim().toLowerCase() ===
+      String(posterId).trim().toLowerCase()
+  );
+
+  if (!poster) {
+    notFound();
+  }
+
+  const videoUrl =
+    typeof poster.videoUrl === "string" ? poster.videoUrl.trim() : "";
+
+  if (!videoUrl) {
+    notFound();
+  }
+
+  const posterTitle = ar ? poster.titleAr : poster.titleEn;
+  const researcherName = ar ? poster.researcherAr : poster.researcherEn;
+
+  const isYouTube =
+    videoUrl.includes("youtube.com/embed") ||
+    videoUrl.includes("youtube-nocookie.com/embed");
 
   return (
     <main
@@ -35,154 +59,136 @@ export default async function PosterVideosPage({
         padding: "24px 16px",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <h1
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          direction: ar ? "rtl" : "ltr",
+        }}
+      >
+        <Link
+          href={`/${lang}/poster-videos`}
           style={{
-            textAlign: "center",
-            marginBottom: "24px",
-            fontSize: "32px",
-            fontWeight: 800,
-            color: "#111827",
+            display: "inline-block",
+            marginBottom: "20px",
+            textDecoration: "none",
+            color: "#0b3b78",
+            fontWeight: 700,
+            fontSize: "16px",
           }}
         >
-          {tx.pageTitle}
-        </h1>
+          ← {tx.back}
+        </Link>
 
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "20px",
+            background: "#ffffff",
+            borderRadius: "18px",
+            padding: "20px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+            border: "1px solid #e5e7eb",
           }}
         >
-          {POSTERS.map((poster) => {
-            const posterTitle = ar ? poster.titleAr : poster.titleEn;
-            const researcherName = ar
-              ? poster.researcherAr
-              : poster.researcherEn;
+          <div style={{ marginBottom: "18px" }}>
+            <div
+              style={{
+                fontSize: "14px",
+                color: "#6b7280",
+                marginBottom: "6px",
+                fontWeight: 600,
+              }}
+            >
+              {tx.researcher}
+            </div>
 
-            const hasVideo =
-              !!poster.videoUrl && !!String(poster.videoUrl).trim();
+            <div
+              style={{
+                fontSize: "28px",
+                fontWeight: 800,
+                color: "#111827",
+                lineHeight: 1.4,
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
+              }}
+            >
+              {researcherName}
+            </div>
+          </div>
 
-            return (
-              <div
-                key={poster.id}
-                style={{
-                  background: "#ffffff",
-                  borderRadius: "18px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-                  border: "1px solid #e5e7eb",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div
-                  style={{
-                    padding: "22px 18px",
-                    textAlign: "center",
-                    direction: ar ? "rtl" : "ltr",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "inline-block",
-                      padding: "10px 18px",
-                      borderRadius: "999px",
-                      background: "#eef4ff",
-                      color: "#1f4a7c",
-                      fontWeight: 800,
-                      fontSize: "14px",
-                      marginBottom: "18px",
-                    }}
-                  >
-                    {tx.posterNo}: {poster.id.toUpperCase()}
-                  </div>
+          <div style={{ marginBottom: "20px" }}>
+            <div
+              style={{
+                fontSize: "14px",
+                color: "#6b7280",
+                marginBottom: "6px",
+                fontWeight: 600,
+              }}
+            >
+              {tx.posterTitle}
+            </div>
 
-                  <div
-                    style={{
-                      fontSize: "14px",
-                      color: "#6b7280",
-                      marginBottom: "8px",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {tx.researcher}
-                  </div>
+            <div
+              style={{
+                fontSize: "20px",
+                color: "#1f2937",
+                lineHeight: 1.7,
+                fontWeight: 500,
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
+              }}
+            >
+              {posterTitle}
+            </div>
+          </div>
 
-                  <div
-                    style={{
-                      fontSize: "clamp(24px, 4vw, 28px)",
-                      fontWeight: 800,
-                      color: "#111827",
-                      lineHeight: 1.4,
-                      marginBottom: "22px",
-                      wordBreak: "break-word",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {researcherName}
-                  </div>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              paddingTop: "56.25%",
+              borderRadius: "16px",
+              overflow: "hidden",
+              background: "#000",
+              marginBottom: "16px",
+            }}
+          >
+            <iframe
+              src={videoUrl}
+              title={posterTitle}
+              allow={
+                isYouTube
+                  ? "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  : "autoplay; fullscreen"
+              }
+              allowFullScreen
+              loading="lazy"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none",
+              }}
+            />
+          </div>
 
-                  <div
-                    style={{
-                      fontSize: "14px",
-                      color: "#6b7280",
-                      marginBottom: "8px",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {tx.posterTitle}
-                  </div>
-
-                  <div
-                    style={{
-                      fontSize: "clamp(18px, 3.4vw, 22px)",
-                      color: "#111827",
-                      lineHeight: 1.7,
-                      fontWeight: 500,
-                      wordBreak: "break-word",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {posterTitle}
-                  </div>
-                </div>
-
-                {hasVideo ? (
-                  <Link
-                    href={`/${lang}/poster-videos/${poster.id}`}
-                    style={{
-                      display: "block",
-                      backgroundColor: "#0b3b78",
-                      color: "#ffffff",
-                      padding: "18px 14px",
-                      textAlign: "center",
-                      textDecoration: "none",
-                      fontWeight: 800,
-                      fontSize: "18px",
-                    }}
-                  >
-                    {tx.watchVideo}
-                  </Link>
-                ) : (
-                  <div
-                    style={{
-                      backgroundColor: "#e5e7eb",
-                      color: "#6b7280",
-                      padding: "18px 14px",
-                      textAlign: "center",
-                      fontWeight: 800,
-                      fontSize: "18px",
-                    }}
-                  >
-                    {tx.noVideo}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-block",
+              background: "#0b3b78",
+              color: "#fff",
+              textDecoration: "none",
+              padding: "12px 18px",
+              borderRadius: "10px",
+              fontWeight: 700,
+            }}
+          >
+            {tx.openDirectly}
+          </a>
         </div>
       </div>
     </main>

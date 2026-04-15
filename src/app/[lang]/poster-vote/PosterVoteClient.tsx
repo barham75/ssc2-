@@ -26,7 +26,7 @@ function t(lang: string) {
 }
 
 function postersList() {
-  return Array.from({ length: 30 }, (_, i) => `P${i + 1}`);
+  return Array.from({ length: 20 }, (_, i) => `P${i + 1}`);
 }
 
 export default function PosterVoteClient({ lang }: { lang: string }) {
