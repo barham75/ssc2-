@@ -205,15 +205,18 @@ export default function ProgramPage({
         </div>
 
         {!loading && rows.length > 0 ? (
-          <div
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: 12,
-              padding: 14,
-              marginBottom: 18,
-              background: "#fcfcfc",
-            }}
-          >
+         <div
+  style={{
+    border: "1px solid #ddd",
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 18,
+    background: "#fcfcfc",
+    width: "100%",
+    boxSizing: "border-box",
+    overflow: "hidden",
+  }}
+>
             <div
               style={{
                 fontWeight: 800,
