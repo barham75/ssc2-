@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 
 type Row = {
   name: string;
@@ -25,7 +25,7 @@ function t(lang: string) {
 
     filters: ar ? "تصفية" : "Filters",
     chooseName: ar ? "اختر الاسم" : "Select name",
-    chooseSpec: ar ? "اختر التخصص" : "Select specialization",
+    chooseType: ar ? "اختر نوع المشاركة" : "Select participation type",
     all: ar ? "الكل" : "All",
 
     name: ar ? "الاسم" : "Name",
@@ -37,11 +37,17 @@ function t(lang: string) {
 }
 
 function uniqSorted(list: string[]) {
-  return Array.from(new Set(list.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+  return Array.from(new Set(list.filter(Boolean))).sort((a, b) =>
+    a.localeCompare(b)
+  );
 }
 
-export default function AbstractsPage({ params }: { params: { lang: string } }) {
-  const lang = params?.lang || "ar";
+export default function AbstractsPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = use(params);
   const L = useMemo(() => t(lang), [lang]);
 
   const [rows, setRows] = useState<Row[]>([]);
@@ -49,7 +55,7 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
   const [err, setErr] = useState("");
 
   const [selectedName, setSelectedName] = useState<string>(ALL);
-  const [selectedSpec, setSelectedSpec] = useState<string>(ALL);
+  const [selectedType, setSelectedType] = useState<string>(ALL);
 
   useEffect(() => {
     let alive = true;
@@ -78,10 +84,16 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
           url: String(r?.url || "").trim(),
         }));
 
-        setRows(normalized);
+        // الفرز: أولاً حسب نوع المشاركة ثم حسب الاسم
+        normalized.sort((a, b) => {
+          const typeCompare = a.type.localeCompare(b.type);
+          if (typeCompare !== 0) return typeCompare;
+          return a.name.localeCompare(b.name);
+        });
 
+        setRows(normalized);
         setSelectedName(ALL);
-        setSelectedSpec(ALL);
+        setSelectedType(ALL);
       } catch (e: any) {
         if (!alive) return;
         setErr(String(e?.message || e));
@@ -96,14 +108,18 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
     };
   }, [L.error]);
 
+  // الأسماء تعتمد على نوع المشاركة المختار
   const nameOptions = useMemo(() => {
-    const base = selectedSpec === ALL ? rows : rows.filter((r) => r.specialization === selectedSpec);
+    const base =
+      selectedType === ALL ? rows : rows.filter((r) => r.type === selectedType);
     return uniqSorted(base.map((r) => r.name));
-  }, [rows, selectedSpec]);
+  }, [rows, selectedType]);
 
-  const specOptions = useMemo(() => {
-    const base = selectedName === ALL ? rows : rows.filter((r) => r.name === selectedName);
-    return uniqSorted(base.map((r) => r.specialization));
+  // أنواع المشاركة تعتمد على الاسم المختار
+  const typeOptions = useMemo(() => {
+    const base =
+      selectedName === ALL ? rows : rows.filter((r) => r.name === selectedName);
+    return uniqSorted(base.map((r) => r.type));
   }, [rows, selectedName]);
 
   useEffect(() => {
@@ -113,22 +129,24 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
   }, [nameOptions, selectedName]);
 
   useEffect(() => {
-    if (selectedSpec !== ALL && !specOptions.includes(selectedSpec)) {
-      setSelectedSpec(ALL);
+    if (selectedType !== ALL && !typeOptions.includes(selectedType)) {
+      setSelectedType(ALL);
     }
-  }, [specOptions, selectedSpec]);
+  }, [typeOptions, selectedType]);
 
   const filtered = useMemo(() => {
     return rows.filter((r) => {
       const okName = selectedName === ALL ? true : r.name === selectedName;
-      const okSpec = selectedSpec === ALL ? true : r.specialization === selectedSpec;
-      return okName && okSpec;
+      const okType = selectedType === ALL ? true : r.type === selectedType;
+      return okName && okType;
     });
-  }, [rows, selectedName, selectedSpec]);
+  }, [rows, selectedName, selectedType]);
 
   return (
     <main style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
-      <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 12 }}>{L.title}</h1>
+      <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 12 }}>
+        {L.title}
+      </h1>
 
       <div
         style={{
@@ -148,8 +166,8 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
           }}
         >
           <select
-            value={selectedSpec}
-            onChange={(e) => setSelectedSpec(e.target.value)}
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
             style={{
               padding: "10px 12px",
               borderRadius: 12,
@@ -159,11 +177,11 @@ export default function AbstractsPage({ params }: { params: { lang: string } }) 
             }}
           >
             <option value={ALL}>
-              {L.all} — {L.chooseSpec}
+              {L.all} — {L.chooseType}
             </option>
-            {specOptions.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {typeOptions.map((t) => (
+              <option key={t} value={t}>
+                {t}
               </option>
             ))}
           </select>
