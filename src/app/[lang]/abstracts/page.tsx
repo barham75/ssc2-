@@ -162,7 +162,7 @@ export default function AbstractsPage({
           style={{
             display: "grid",
             gap: 10,
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(0, 1fr))",
           }}
         >
           <select
