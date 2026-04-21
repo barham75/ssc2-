@@ -177,4 +177,12 @@ export const POSTERS: PosterItem[] = [
     researcherEn: "Ahmad Mansour",
     videoUrl: "",
   },
+  {
+    id: "p21",
+    titleAr:"Green Upcycling of Transparent Waste Glass for Rare-Earth Capture: Adsorption of Nd and Ce from Aqueous Media",
+    titleEn:"Green Upcycling of Transparent Waste Glass for Rare-Earth Capture: Adsorption of Nd and Ce from Aqueous Media",
+    researcherAr: "Sara abu Shaqra",
+    researcherEn: "Sara abu Shaqra",
+    videoUrl: "",
+  },
 ];
