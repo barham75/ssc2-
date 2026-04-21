@@ -101,7 +101,7 @@ export default function LunchInviteClient({ lang }: { lang: string }) {
       </div>
 
       <div style={{ marginTop: 10, fontWeight: 800 }}>
-        {ar ? "حت رعاية  ا د رئيس  الجامعه  يتشرف ا.د عميد كلية العلوم  بدعوتكم  للغداءارجود للاستفادة من الدعوة." : "Please show this QR at the restaurant entrance."}
+        {ar ? "تحت رعاية  ا د رئيس  الجامعه  يتشرف ا.د عميد كلية العلوم  بدعوتكم  للغداءارجود للاستفادة من الدعوة." : "Please show this QR at the restaurant entrance."}
       </div>
 
       <div style={{ marginTop: 10, color: "#666", fontWeight: 700, fontSize: 13 }}>
