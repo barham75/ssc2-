@@ -57,7 +57,7 @@ export default function ProgramPage({
   const L = useMemo(() => t(lang), [lang]);
 
   const PROGRAM_PDF_URL =
-    "https://drive.google.com/file/d/1HK7O7F7gXNYEGthz6qGK1C_qdanuikPi/view?usp=sharing";
+    "https://drive.google.com/file/d/1p3MZnJtlebjB9RIItGPv_dLEk17eQ9LQ/view?usp=sharing";
 
   useEffect(() => {
     (async () => {
