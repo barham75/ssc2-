@@ -3,9 +3,31 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loadSession } from "@/lib/session";
+import { POSTERS } from "@/lib/posters";
 
 type Winner = { bestId: string; bestCount: number };
 type Results = Record<string, number>;
+
+function getPosterResearcher(id: string, lang: string) {
+  const poster = POSTERS.find(
+    (item) => String(item.id).trim().toUpperCase() === String(id).trim().toUpperCase()
+  );
+
+  if (!poster) return "";
+
+  return lang === "ar"
+    ? String(poster.researcherAr || "")
+    : String(poster.researcherEn || "");
+}
+
+function posterLabel(id: string, lang: string) {
+  const researcher = getPosterResearcher(id, lang);
+  if (!researcher) return id;
+
+  return lang === "ar"
+    ? `${id} — ${researcher}`
+    : `${id} — ${researcher}`;
+}
 
 function t(lang: string) {
   const ar = lang === "ar";
@@ -152,11 +174,11 @@ export default function PosterVoteClient({ lang }: { lang: string }) {
               disabled={!!yourVote}
               style={{ padding: 12, borderRadius: 12, border: "1px solid #ddd" }}
             >
-              {posterOptions.map((p) => (
-                <option key={p} value={p}>
-                  {p}
-                </option>
-              ))}
+             {posterOptions.map((p) => (
+  <option key={p} value={p}>
+    {posterLabel(p, lang)}
+  </option>
+))}
             </select>
 
             <button
@@ -210,7 +232,7 @@ export default function PosterVoteClient({ lang }: { lang: string }) {
                 <tbody>
                   {sorted.map((x) => (
                     <tr key={x.id}>
-                      <td style={td}>{x.id}</td>
+                      <td style={td}>{posterLabel(x.id, lang)}</td>
                       <td style={td}>{x.c}</td>
                     </tr>
                   ))}

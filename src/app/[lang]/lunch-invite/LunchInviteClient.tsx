@@ -101,11 +101,11 @@ export default function LunchInviteClient({ lang }: { lang: string }) {
       </div>
 
       <div style={{ marginTop: 10, fontWeight: 800 }}>
-        {ar ? "يرجى إظهار هذا الرمز عند الدخول للمطعم." : "Please show this QR at the restaurant entrance."}
+        {ar ? "يتشرّف رئيس المؤتمر بدعوتكم لتناول الغداء، يرجى إبراز الباركود للاستفادة من الدعوة." : "Please show this QR at the restaurant entrance."}
       </div>
 
       <div style={{ marginTop: 10, color: "#666", fontWeight: 700, fontSize: 13 }}>
-        {ar ? "ملاحظة: لا تشارك الرمز مع الآخرين." : "Note: Do not share this QR with others."}
+        {ar ? "ملاحظة: ارجو عدم  مشارك الرمز مع الآخرين." : "Note: Do not share this QR with others."}
       </div>
     </div>
   );
