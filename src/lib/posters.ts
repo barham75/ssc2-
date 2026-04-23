@@ -130,8 +130,8 @@ export const POSTERS: PosterItem[] = [
     id: "p15",
     titleAr: "The Role of Electron Acceptor-Donor Material",
     titleEn: "The Role of Electron Acceptor-Donor Material",
-    researcherAr: "Barajah M. Mashagba",
-    researcherEn: "Barajah M. Mashagba",
+    researcherAr: "Bara'ah M. Mashagba",
+    researcherEn: "Bara'ah M. Mashagba",
     videoUrl: "",
   },
   {
