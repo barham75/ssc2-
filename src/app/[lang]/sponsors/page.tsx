@@ -27,7 +27,7 @@ const SPONSORS: Sponsor[] = [
   {
     id: "s2",
     tier: "silver",
-    nameAr: "GreenField",
+    nameAr: "السيد نيازي حدادين",
     nameEn: "GreenField Nutritions",
     logo: "/sponsors/Sponsorship2.jpg",
   },
