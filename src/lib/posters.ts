@@ -26,7 +26,7 @@ export const POSTERS: PosterItem[] = [
       "Organo-Compound-Modified Cellulose Acetate (CA) Polymers for Water Treatment Applications",
     researcherAr: "Shaikha A. Almajid",
     researcherEn: "Shaikha A. Almajid",
-    videoUrl: "https://mttvtcedu-my.sharepoint.com/personal/almajed_m_tvtc_gov_sa/_layouts/15/stream.aspx?id=%2Fpersonal%2Falmajed%5Fm%5Ftvtc%5Fgov%5Fsa%2FDocuments%2FShaikah%20Almajed%2Fposter%2Fvideo%5F2026%2D04%2D25%5F05%2D10%2D37%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2Ef6058ec4%2Db95b%2D4cab%2Dbb6f%2D64dc924c9064",
+    videoUrl: "https://youtu.be/3r2i2GPAK1Y",
   },
   {
     id: "p3",
