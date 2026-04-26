@@ -114,8 +114,8 @@ export const POSTERS: PosterItem[] = [
     id: "p13",
     titleAr: "Food and Feed Laboratories",
     titleEn: "Food and Feed Laboratories",
-    researcherAr: "Enas Aliswed",
-    researcherEn: "Enas Aliswed",
+    researcherAr: "Enas Aliswed+Elham Shehab+Heba Jaber",
+    researcherEn: "Enas Aliswed+Elham Shehab+Heba Jaber",
     videoUrl: "",
   },
   {
